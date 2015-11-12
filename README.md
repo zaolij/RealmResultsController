@@ -1,14 +1,10 @@
 ![](https://img.shields.io/badge/coverage-100%25-green.svg)
 ![](https://img.shields.io/badge/language-swift-blue.svg)
-![](https://img.shields.io/badge/version-0.2.0-red.svg)
+![](https://img.shields.io/badge/version-0.2.3-red.svg)
 
 ![](Images/RRCHigh.png)
 
 A NSFetchedResultsController implementation for Realm written in Swift
-
-###Changelog:
-
-- __0.1.0 Initial Release__ (4 Sept 2015)
 
 ###Quick Start:
 
@@ -248,13 +244,9 @@ realm.addNotified(task)
 
 ### Demo:
 
-To use the demo, compile Realm.framework and RealmSwift.framework for Swift 2.0 using this instructions:
+To use the demo, just run the following command to install the Realm dependencies using Carthage:
 
-1. Clone `Realm` from their __[repository on GitHub](https://github.com/realm/realm-cocoa)__
-2. Run `REALM_SWIFT_VERSION=2.0 sh build.sh build` in the cloned repository.
-3. Drag the versions of __RealmSwift.framework__ and __Realm.framework__ from `build/ios/swift-2.0/` directory to the RRC folder `Example/Carthage/Build/iOS.` 
-
-[Realm Swift 2.0 Installation](https://realm.io/docs/swift/latest/#installation-swift-20)
+`carthage update --platform iOS`
 
 <p align="center">
 <img src="Images/RRCDemo.gif" height="300px"/>
@@ -262,12 +254,18 @@ To use the demo, compile Realm.framework and RealmSwift.framework for Swift 2.0 
 
 ###Installation:
 
-:loudspeaker: We are going to integrate with __CocoaPods__ soon
-
 #### Carthage:
 
 ```
-github "redbooth/RealmResultsController" "0.2.0"
+github "redbooth/RealmResultsController" "0.2.3"
+```
+
+#### CocoaPods:
+
+```
+use_frameworks!
+
+pod 'RealmResultsController', '~> 0.2.3'
 ```
 
 #### Manual:
@@ -280,7 +278,7 @@ Copy the files inside the `/Source` folder to your project
 More info [here](https://realm.io/docs/swift/latest/#installation-swift-20)
 
 ### Technical details:
-- Swift 2.0
+- Swift 2.1
 
 ###Licenses
 All source code is licensed under the MIT License.

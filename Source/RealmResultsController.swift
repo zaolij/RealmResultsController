@@ -205,6 +205,7 @@ public class RealmResultsController<T: Object, U> : RealmResultsCacheDelegate {
     - returns: the objects count at the sectionIndex
     */
     public func numberOfObjectsAt(sectionIndex: Int) -> Int {
+        if cache.sections.count == 0 { return 0 }
         return cache.sections[sectionIndex].objects.count
     }
 
@@ -258,13 +259,13 @@ public class RealmResultsController<T: Object, U> : RealmResultsCacheDelegate {
     func didInsertSection<T : Object>(section: Section<T>, index: Int) {
         if populating { return }
         executeOnMainThread {
-            self.delegate?.didChangeSection(self, section: realmSectionMapper(section), index: index, changeType: .Insert)
+            self.delegate?.didChangeSection(self, section: self.realmSectionMapper(section), index: index, changeType: .Insert)
         }
     }
     
     func didDeleteSection<T : Object>(section: Section<T>, index: Int) {
         executeOnMainThread {
-            self.delegate?.didChangeSection(self, section: realmSectionMapper(section), index: index, changeType: .Delete)
+            self.delegate?.didChangeSection(self, section: self.realmSectionMapper(section), index: index, changeType: .Delete)
         }
     }
     
@@ -307,7 +308,12 @@ public class RealmResultsController<T: Object, U> : RealmResultsCacheDelegate {
                 temporaryAdded.append(object.mirror as! T)
             }
             else if object.action == RealmAction.Update {
-                passesPredicate ? temporaryUpdated.append(object.mirror as! T) : temporaryDeleted.append(object.mirror as! T)
+                if passesFilter && passesPredicate {
+                    temporaryUpdated.append(object.mirror as! T)
+                }
+                else {
+                    temporaryDeleted.append(object.mirror as! T)
+                }
             }
         }
     }
